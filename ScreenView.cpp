@@ -49,14 +49,21 @@ void ScreenView::saveAs()
         return;
     }
 
-    QString fullPath = QFileDialog::getSaveFileName(this,"Enregistrer Sous");
+    QString fullPath = QFileDialog::getSaveFileName(this,"Enregistrer Sous",QString(),QString("PNG Files (*.png);;All Files (*.*)").toAscii().data());
     if(!fullPath.isEmpty())
     {
-        QString name = fullPath.mid(fullPath.lastIndexOf("/") + 1);
+        if(fullPath.mid(fullPath.lastIndexOf("/") + 1).indexOf(".") == -1) // Aucun format renseigné
+        {
+            fullPath += ".png";
+        }
+
         if(!screenPixMap->pixmap()->save(fullPath))
         {
             QMessageBox::critical(this,"Erreur","Une erreur s'est produite durant la sauvegarde de l'image.");
+            return;
         }
+
+        leaveScreenView();
     }
 }
 

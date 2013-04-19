@@ -8,7 +8,7 @@ ScreenArea::ScreenArea()
     setWindowFlags(Qt::FramelessWindowHint); // On enlève les bords
     showMaximized(); // On prend tout l'écran
 
-    // Initialisation Widgets
+    // Initialisation Widgets'
     screenView = new ScreenView;
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     rubberBand->setWindowOpacity(0);
