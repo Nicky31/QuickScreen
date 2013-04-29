@@ -14,9 +14,6 @@ public:
 signals:
     void leaveArea();
 
-private slots:
-    void takeFullScreen();
-
 private:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

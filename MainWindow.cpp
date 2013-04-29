@@ -4,7 +4,11 @@
 MainWindow::MainWindow()
 {
     setWindowTitle("Funky ScreenShot");
-    setGeometry(QRect(200,200,400,150));
+
+    QDesktopWidget* bureau = QApplication::desktop();
+    int x = (bureau->screenGeometry(bureau->primaryScreen()).width()/2) - (width()/2);
+    int y = (bureau->screenGeometry(bureau->primaryScreen()).height()/2) - (height()/2);
+    move(x,y);
 
     // Initialisation des Widgets
     VLayout = new QVBoxLayout;
