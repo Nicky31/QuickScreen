@@ -2,7 +2,9 @@
 
 ScreenView::ScreenView()
 {
-    // Initialisation widgets
+    setVisible(false);
+    setWindowModality(Qt::WindowModal);
+
     screenPixMap = new QLabel;
     VLayout = new QVBoxLayout;
     HLayout = new QHBoxLayout;
@@ -11,7 +13,6 @@ ScreenView::ScreenView()
     upBt = new QPushButton("Mettre en ligne");
     SaveUpBt = new QPushButton("Enregistrer sous et mettre en ligne");
 
-    // Placements
     HLayout->addWidget(exitBt);
     HLayout->addWidget(saveBt);
     //HLayout->addWidget(upBt);
@@ -19,19 +20,22 @@ ScreenView::ScreenView()
 
     VLayout->addWidget(screenPixMap);
     VLayout->addLayout(HLayout);
-
     setLayout(VLayout);
 
-    setVisible(false);
-    setWindowModality(Qt::WindowModal);
-
-    // Connections
     QObject::connect(exitBt,SIGNAL(clicked()),this,SLOT(leaveScreenView()));
     QObject::connect(saveBt,SIGNAL(clicked()),this,SLOT(saveAs()));
 }
 
 void ScreenView::setScreenPixmap(QPixmap screen)
 {
+    /*
+    QPainter painter(&screen);
+    painter.setPen(Qt::blue);
+    painter.setBrush(QBrush(QColor(255,255,255)));
+    painter.setFont(QFont("Arial", 13));
+    painter.drawText(screen.width() - 208,screen.height() - 13,"Funky ScreenShot");
+    painter.end();*/
+
     screenPixMap->setPixmap(screen);
     setVisible(true);
 }

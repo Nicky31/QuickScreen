@@ -27,7 +27,6 @@ private:
     QPoint origin;
     QRubberBand* rubberBand;
     QAction* leaveAreaAction;
-    QAction* fullScreenAction;
     QRect lastArea;
 
 };

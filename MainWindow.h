@@ -23,6 +23,5 @@ private:
     QVBoxLayout* VLayout;
     QPushButton* selectScreenBt;
     QLabel* screenUrlLb;
-
 };
 #endif // MAINWINDOW_H

@@ -4,7 +4,8 @@
 ScreenArea::ScreenArea()
 {
     move(0,0); // Placement coin en haut à gauche
-    setWindowOpacity(0.5); // Transparence
+    setAttribute(Qt::WA_TranslucentBackground, true);
+
     setWindowFlags(Qt::FramelessWindowHint); // On enlève les bords
     showMaximized(); // On prend tout l'écran
 
@@ -12,17 +13,15 @@ ScreenArea::ScreenArea()
     screenView = new ScreenView;
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
     rubberBand->setWindowOpacity(0);
-    leaveAreaAction = new QAction("Annuler",this);
-    fullScreenAction = new QAction("Capture complète",this);
+    leaveAreaAction = new QAction("Annuler (Ctrl + F)",this);
+    leaveAreaAction->setShortcut(QKeySequence("Ctrl+F"));
 
     // Menu contextuel
     addAction(leaveAreaAction);
-    addAction(fullScreenAction);
     setContextMenuPolicy(Qt::ActionsContextMenu);
 
     // Connections
     QObject::connect(leaveAreaAction,SIGNAL(triggered()),this,SIGNAL(leaveArea()));
-    QObject::connect(fullScreenAction,SIGNAL(triggered()),this,SLOT(takeFullScreen()));
 }
 
 void ScreenArea::mousePressEvent(QMouseEvent *event)
@@ -40,9 +39,7 @@ void ScreenArea::mouseMoveEvent(QMouseEvent *event)
 void ScreenArea::mouseReleaseEvent(QMouseEvent *event)
 {
     if(screenView->isVisible())
-    {
         return;
-    }
 
     QRect area = rubberBand->geometry();
     QPixmap screen = QPixmap::grabWindow(QApplication::desktop()->winId(),
@@ -50,11 +47,6 @@ void ScreenArea::mouseReleaseEvent(QMouseEvent *event)
                              area.y() + y() + 1,
                              area.width() - 2,
                              area.height() - 2);
-    screenView->setScreenPixmap(screen);
-}
 
-void ScreenArea::takeFullScreen()
-{
-    QPixmap originalPixmap = QPixmap::grabWindow(winId());
-    screenView->setScreenPixmap(originalPixmap);
+    screenView->setScreenPixmap(screen);
 }
