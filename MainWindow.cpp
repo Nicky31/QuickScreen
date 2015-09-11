@@ -12,15 +12,18 @@ MainWindow::MainWindow()
 
     VLayout = new QVBoxLayout;
     selectScreenBt = new QPushButton("Selectionner un espace de screen");
+    lastScreenLb = new QLabel;
 
     screenArea = new ScreenArea; // Espace de sélection
     screenArea->setVisible(false);
 
     VLayout->addWidget(selectScreenBt);
+    VLayout->addWidget(lastScreenLb);
     setLayout(VLayout);
 
     QObject::connect(selectScreenBt,SIGNAL(clicked()),this,SLOT(selectScreen())); // Sélectionner un espace de screen
     QObject::connect(screenArea,SIGNAL(leaveArea()),this,SLOT(leaveArea())); // On quitte l'espace de screen
+    QObject::connect(screenArea, SIGNAL(screenSaved(QString)), this, SLOT(leaveArea(QString)));
 }
 
 void MainWindow::selectScreen()
@@ -29,8 +32,11 @@ void MainWindow::selectScreen()
     screenArea->setVisible(true);
 }
 
-void MainWindow::leaveArea()
+void MainWindow::leaveArea(QString lastScreen)
 {
     setVisible(true);
     screenArea->setVisible(false);
+
+    if(lastScreen != "")
+        lastScreenLb->setText("Dernier screen : " + lastScreen);
 }

@@ -19,6 +19,7 @@ ScreenArea::ScreenArea()
     setContextMenuPolicy(Qt::ActionsContextMenu);
 
     QObject::connect(leaveAreaAction,SIGNAL(triggered()),this,SIGNAL(leaveArea()));
+    QObject::connect(screenView,SIGNAL(screenSaved(QString)),this,SIGNAL(screenSaved(QString)));
 }
 
 void ScreenArea::mousePressEvent(QMouseEvent *event)

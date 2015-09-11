@@ -13,6 +13,7 @@ public:
 
 signals:
     void leaveArea();
+    void screenSaved(QString);
 
 private:
     void mousePressEvent(QMouseEvent *event);

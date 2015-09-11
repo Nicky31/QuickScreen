@@ -16,6 +16,9 @@ public:
     void setScreenPixmap(QPixmap screen);
     QString generateFilename(QString ext = ".png") const;
 
+signals:
+    void screenSaved(QString);
+
 private slots:
     void leaveScreenView();
     void saveAs();

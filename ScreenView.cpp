@@ -108,6 +108,7 @@ void ScreenView::copyScreenUrl()
     QClipboard* pressPaper = QApplication::clipboard();
     pressPaper->setText(lastScreenUrl);
     leaveScreenView();
+    emit screenSaved(lastScreenUrl);
 }
 
 void ScreenView::messageErreur(QNetworkReply::NetworkError)
@@ -140,6 +141,7 @@ void ScreenView::saveAs()
         }
 
         leaveScreenView();
+        emit screenSaved(fullPath);
     }
 }
 

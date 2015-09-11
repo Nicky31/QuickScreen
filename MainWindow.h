@@ -14,9 +14,10 @@ public:
 
 private slots:
     void selectScreen();
-    void leaveArea();
+    void leaveArea(QString lastScreen = "");
 
 private:
+    QLabel* lastScreenLb;
     ScreenArea* screenArea;
     QVBoxLayout* VLayout;
     QPushButton* selectScreenBt;
