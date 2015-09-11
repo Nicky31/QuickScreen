@@ -2,6 +2,10 @@
 #define SCREENVIEW_H
 
 #include <QtGui>
+#include <QtNetwork>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 class ScreenView : public QWidget
 {
@@ -10,10 +14,15 @@ class ScreenView : public QWidget
 public:
     ScreenView();
     void setScreenPixmap(QPixmap screen);
+    QString generateFilename(QString ext = ".png") const;
 
 private slots:
     void leaveScreenView();
     void saveAs();
+    void upload();
+    void messageErreur(QNetworkReply::NetworkError);
+    void handleUploadReply();
+    void copyScreenUrl();
 
 private:
     QLabel* screenPixMap;
@@ -22,7 +31,10 @@ private:
     QPushButton* exitBt;
     QPushButton* saveBt;
     QPushButton* upBt;
-    QPushButton* SaveUpBt;
+    QPushButton* copyUrlBt;
+
+    QString lastScreenUrl;
+
 };
 
 #endif // SCREENVIEW_H

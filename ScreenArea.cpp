@@ -9,10 +9,8 @@ ScreenArea::ScreenArea()
     setWindowFlags(Qt::FramelessWindowHint); // On enlève les bords
     showMaximized(); // On prend tout l'écran
 
-    // Initialisation Widgets'
     screenView = new ScreenView;
     rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
-    rubberBand->setWindowOpacity(0);
     leaveAreaAction = new QAction("Annuler (Ctrl + F)",this);
     leaveAreaAction->setShortcut(QKeySequence("Ctrl+F"));
 
@@ -20,7 +18,6 @@ ScreenArea::ScreenArea()
     addAction(leaveAreaAction);
     setContextMenuPolicy(Qt::ActionsContextMenu);
 
-    // Connections
     QObject::connect(leaveAreaAction,SIGNAL(triggered()),this,SIGNAL(leaveArea()));
 }
 

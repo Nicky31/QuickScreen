@@ -18,10 +18,7 @@ private slots:
 
 private:
     ScreenArea* screenArea;
-    ScreenView* screenView;
-
     QVBoxLayout* VLayout;
     QPushButton* selectScreenBt;
-    QLabel* screenUrlLb;
 };
 #endif // MAINWINDOW_H

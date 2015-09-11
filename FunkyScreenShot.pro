@@ -8,3 +8,5 @@ HEADERS += \
     MainWindow.h \
     ScreenArea.h \
     ScreenView.h
+
+QT += network
